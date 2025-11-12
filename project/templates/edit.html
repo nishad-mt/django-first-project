@@ -1,0 +1,51 @@
+{% extends 'home.html' %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Edit Book</h2>
+    
+    <form method="post" enctype="multipart/form-data" class="p-3 border rounded shadow-sm">
+        {% csrf_token %}
+        
+        <!-- Display existing image -->
+        {% if book.image %}
+            <div class="text-center mb-3">
+                <p class="fw-semibold">Current Image:</p>
+                <img src="{{ book.image.url }}" alt="{{ book.title }}" 
+                     width="150" height="200" 
+                     style="object-fit: cover; border-radius: 10px;">
+            </div>
+        {% endif %}
+
+        <!-- Render form fields except image -->
+        {% for field in form %}
+            {% if field.name != 'image' %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Custom single image field -->
+        <div class="mb-3">
+            <label for="id_image" class="form-label fw-semibold">Upload New Image</label>
+            <input type="file" name="image" id="id_image" class="form-control">
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary px-4">Update</button>
+        </div>
+    </form>
+
+    <div class="text-center mt-3">
+        <a href="{% url 'view' %}" class="btn btn-secondary">Back to My Books</a>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<h1 style="text-align:center">Books that you miss !</h1>
+
+<div class="container mt-4">
+    {% if not books %}
+        <p style="color:rgba(169, 169, 169, 0.877); font-weight:bolder; text-align:center;">
+            No Suggestions yet 😅
+        </p>
+        <p>Add Yours suggetions
+    <a href="{% url 'create'  %}" class="btn btn-primary btn-sm me-2">Add</a>
+    </p>
+    <br><hr>
+    {% endif %}
+{% if books %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">
+        {% for buk in books %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 ps-3">
+                <img src="{{ buk.image.url }}" class="card-img-top" alt="{{ buk.title }}" style="height: 200px; object-fit: cover;">
+
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-semibold">{{ buk.title }}</h5>
+                    <p class="text-muted mb-1"><small>by {{ buk.author }}</small></p>
+                    <p class="card-text" style="font-size: 0.9rem;">{{ buk.description|truncatewords:10 }}</p>
+                    <a href="{% url 'edit' buk.id %}" class="btn btn-primary btn-sm me-2">Edit</a>
+                    <a href="{% url 'delete' buk.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<p style="text-align: center;">Sugget New one
+    <a href="{% url 'create'  %}" class="btn btn-primary btn-sm me-2">Suggest</a>
+    </p>
+    {% endif %}
+{% endblock %}
+

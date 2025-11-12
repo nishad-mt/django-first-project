@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 600px;">
+    <div class="card-body text-center py-4">
+      <h2 class="text-primary fw-bold mb-4">My Profile</h2>
+      
+      <div class="text-start px-4">
+        <p><strong>Name:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+      </div>
+
+      <a href="{% url 'edit_profile' %}" class="btn btn-primary mt-3">Edit Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

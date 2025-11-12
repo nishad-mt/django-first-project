@@ -1,0 +1,24 @@
+# Byte-compiled / cache files
+__pycache__/
+*.pyc
+
+# Django / local
+db.sqlite3
+media/
+staticfiles/
+
+# Virtual environment
+venv/
+env/
+virtual/
+.venv/
+
+# Environment files
+.env
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
